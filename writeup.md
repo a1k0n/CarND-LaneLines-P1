@@ -14,9 +14,13 @@ approach.
 The image pipeline to detect lane lines starts with the standard steps:
 
  - Conversion to grayscale
+![grayscale](images/img_gray.png)
  - 5x5 Gaussian blur
+![blur](images/img_blur.png)
  - Canny edge detection
+![canny](images/img_canny.png)
  - Masking a region of interest
+![region of interest](images/img_roi.png)
 
 From this point, I started out using the probabilistic Hough transform to find
 line segments in the image, but when it came time to extrapolate them to find
@@ -32,8 +36,14 @@ right halves of the screen, and do an iteratively reweighted least squares fit
 procedure on each of them (iteratively reweighted in order to better reject
 outliers).
 
+![left and right lanes](images/img_lanes.png)
+Here, the left edge pixels used in the linear fit are colored yellow and the
+right edge pixels are colored cyan. The best-fit lines are in red and blue.
+
 Then I draw the extrapolated line from the bottom of the screen to the vanishing
 point y coordinate (which is a parameter of the algorithm).
+
+![final result](images/img_final.png)
 
 ### 2. Shortcomings of this approach
 
